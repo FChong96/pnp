@@ -13,6 +13,7 @@ public:
 	int top_lfet_y;
 };
 
+/* class ppm - store ppm data */
 class ppm {
 public:
 	int type;
@@ -24,6 +25,7 @@ public:
 	std::vector<unsigned char> data;
 };
 
+/* class ppmop - ppm operations */
 class ppmop {
 public:
 	ppmop() {}
@@ -52,6 +54,11 @@ private:
 	int readPpmToBuffer(std::string filepath, ppm& inppm, std::vector<unsigned char>& in_data);
 };
 
+/* getppmInfo() function
+ * from input data create and fill an inppm class
+ * @ in  - in_data: read from input file
+ * @ out - inppm : get the ppm class
+*/
 int ppmop::getppmInfo(std::vector<unsigned char> in_data, ppm& inppm) {
 	std::vector<unsigned char>::iterator ppm_iter;
 	std::vector<unsigned char>::iterator tmp_iter;
@@ -104,6 +111,12 @@ int ppmop::getppmInfo(std::vector<unsigned char> in_data, ppm& inppm) {
 	return 0;
 }
 
+/* readPpmToBuffer() function
+ * read a ppm file to buffer 
+ * @ in  - filepath: the input file path
+ * @ out - inppm : get the ppm class
+ * @ out - in_data : get the data buffer
+*/
 int ppmop::readPpmToBuffer(std::string filepath, ppm& inppm, std::vector<unsigned char>& in_data)
 {
 	typedef std::istream_iterator<unsigned char> istream_iterator;
@@ -141,6 +154,11 @@ int ppmop::readPpmToBuffer(std::string filepath, ppm& inppm, std::vector<unsigne
 	return 0;
 }
 
+/* read() function
+ * read a ppm file to ppm class
+ * @ in  - filepath: the input file path
+ * @ out - inppm : get the ppm class
+*/
 int ppmop::read(std::string filepath, ppm& inppm)
 {
 	std::size_t split_num;
@@ -171,6 +189,11 @@ int ppmop::read(std::string filepath, ppm& inppm)
 	return 0;
 }
 
+/* writeppm() function
+ * write a ppm to a file
+ * @ in - filepath: the output file path
+ * @ in - outppm :  the ppm class
+*/
 int ppmop::writeppm(std::string filepath, ppm& outppm) {
 	std::ofstream out_fd;
 	std::vector<unsigned char> out_data(outppm.data);
